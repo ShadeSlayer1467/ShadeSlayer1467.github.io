@@ -47,7 +47,7 @@ If you're looking for custom software tools or local app development:
 
 **Matthew Read**  
 📍 Lafayette, Oregon  
-📧 matthew.read.101@gmail.com  
+📧 matthew@readtechsolutions.com  
 📞 (971) 237-2807  
 🔗 [GitHub Profile](https://github.com/shadeslayer1467)
 
