@@ -4154,3 +4154,41 @@ input, select, textarea {
 		}
 
 	}
+
+	
+	
+
+	/* Base scaling for smaller devices */
+body {
+	font-size: 16px;
+}
+
+/* Medium screens (tablets) */
+@media screen and (max-width: 768px) {
+	body {
+		font-size: 18px;
+	}
+	h1, h2, h3 {
+		font-size: 1.4em;
+	}
+	.wrapper .inner {
+		padding: 2em 1em;
+	}
+}
+
+/* Small screens (phones) */
+@media screen and (max-width: 480px) {
+	body {
+		font-size: 18px;
+	}
+	h1, h2, h3 {
+		font-size: 1.2em;
+	}
+	.logo img {
+		width: 160px;
+	}
+	nav a, .special, .button {
+		font-size: 1em;
+		padding: 0.6em 1em;
+	}
+}
