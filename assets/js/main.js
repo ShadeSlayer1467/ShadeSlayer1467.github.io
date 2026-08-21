@@ -1,145 +1,137 @@
-/*
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+(function () {
+  const body = document.body;
+  const header = document.querySelector(".site-header");
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector("#site-nav");
+  const contactForm = document.querySelector("[data-contact-form]");
 
-(function($) {
+  if (header) {
+    const setHeaderState = () => {
+      header.dataset.scrolled = window.scrollY > 8 ? "true" : "false";
+    };
 
-	var	$window = $(window),
-		$body = $('body'),
-		$header = $('#header'),
-		$banner = $('#banner');
+    setHeaderState();
+    window.addEventListener("scroll", setHeaderState, { passive: true });
+  }
 
-	// Breakpoints.
-		breakpoints({
-			xlarge:	'(max-width: 1680px)',
-			large:	'(max-width: 1280px)',
-			medium:	'(max-width: 980px)',
-			small:	'(max-width: 736px)',
-			xsmall:	'(max-width: 480px)'
-		});
+  if (!toggle || !nav) {
+    setupContactForm();
+    return;
+  }
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+  const openMenu = () => {
+    body.classList.add("nav-open");
+    toggle.setAttribute("aria-expanded", "true");
+    const firstLink = nav.querySelector("a");
 
-	// Header.
-		if ($banner.length > 0
-		&&	$header.hasClass('alt')) {
+    if (firstLink) {
+      firstLink.focus({ preventScroll: true });
+    }
+  };
 
-			$window.on('resize', function() { $window.trigger('scroll'); });
+  const closeMenu = () => {
+    body.classList.remove("nav-open");
+    toggle.setAttribute("aria-expanded", "false");
+  };
 
-			$banner.scrollex({
-				bottom:		$header.outerHeight(),
-				terminate:	function() { $header.removeClass('alt'); },
-				enter:		function() { $header.addClass('alt'); },
-				leave:		function() { $header.removeClass('alt'); }
-			});
+  toggle.addEventListener("click", () => {
+    if (body.classList.contains("nav-open")) {
+      closeMenu();
+      return;
+    }
 
-		}
+    openMenu();
+  });
 
-	// Menu.
-		var $menu = $('#menu');
+  nav.addEventListener("click", (event) => {
+    if (event.target.closest("a")) {
+      closeMenu();
+    }
+  });
 
-		$menu._locked = false;
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMenu();
+      toggle.focus({ preventScroll: true });
+    }
+  });
 
-		$menu._lock = function() {
+  window.addEventListener("resize", () => {
+    if (window.matchMedia("(min-width: 861px)").matches) {
+      closeMenu();
+    }
+  });
 
-			if ($menu._locked)
-				return false;
+  setupContactForm();
 
-			$menu._locked = true;
+  function setupContactForm() {
+    if (!contactForm || !window.fetch || !window.FormData) {
+      return;
+    }
 
-			window.setTimeout(function() {
-				$menu._locked = false;
-			}, 350);
+    const status = contactForm.querySelector("[data-form-status]");
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const defaultButtonText = submitButton ? submitButton.textContent : "";
 
-			return true;
+    const setStatus = (message, state) => {
+      if (!status) {
+        return;
+      }
 
-		};
+      status.textContent = message;
+      status.dataset.state = state || "";
+    };
 
-		$menu._show = function() {
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
 
-			if ($menu._lock())
-				$body.addClass('is-menu-visible');
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
 
-		};
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Sending...";
+      }
 
-		$menu._hide = function() {
+      setStatus("Sending your notes...", "pending");
 
-			if ($menu._lock())
-				$body.removeClass('is-menu-visible');
+      try {
+        const response = await fetch(contactForm.action, {
+          method: contactForm.method,
+          body: new FormData(contactForm),
+          headers: {
+            Accept: "application/json"
+          }
+        });
 
-		};
+        if (response.ok) {
+          contactForm.reset();
+          setStatus("Thanks. Your process notes were sent.", "success");
+          return;
+        }
 
-		$menu._toggle = function() {
+        let errorMessage = "Something went wrong. Your message was not sent, and the form has not been cleared.";
 
-			if ($menu._lock())
-				$body.toggleClass('is-menu-visible');
+        try {
+          const data = await response.json();
+          if (data && Array.isArray(data.errors) && data.errors.length > 0) {
+            errorMessage = data.errors.map((error) => error.message).filter(Boolean).join(" ");
+          }
+        } catch (error) {
+          // Formspree may return a non-JSON error page; keep the safe fallback.
+        }
 
-		};
-
-		$menu
-			.appendTo($body)
-			.on('click', function(event) {
-
-				event.stopPropagation();
-
-				// Hide.
-					$menu._hide();
-
-			})
-			.find('.inner')
-				.on('click', '.close', function(event) {
-
-					event.preventDefault();
-					event.stopPropagation();
-					event.stopImmediatePropagation();
-
-					// Hide.
-						$menu._hide();
-
-				})
-				.on('click', function(event) {
-					event.stopPropagation();
-				})
-				.on('click', 'a', function(event) {
-
-					var href = $(this).attr('href');
-
-					event.preventDefault();
-					event.stopPropagation();
-
-					// Hide.
-						$menu._hide();
-
-					// Redirect.
-						window.setTimeout(function() {
-							window.location.href = href;
-						}, 350);
-
-				});
-
-		$body
-			.on('click', 'a[href="#menu"]', function(event) {
-
-				event.stopPropagation();
-				event.preventDefault();
-
-				// Toggle.
-					$menu._toggle();
-
-			})
-			.on('keydown', function(event) {
-
-				// Hide on escape.
-					if (event.keyCode == 27)
-						$menu._hide();
-
-			});
-
-})(jQuery);
+        setStatus(errorMessage, "error");
+      } catch (error) {
+        setStatus("Could not reach the form service. Your message was not sent, and the form has not been cleared.", "error");
+      } finally {
+        if (submitButton) {
+          submitButton.disabled = false;
+          submitButton.textContent = defaultButtonText;
+        }
+      }
+    });
+  }
+})();
