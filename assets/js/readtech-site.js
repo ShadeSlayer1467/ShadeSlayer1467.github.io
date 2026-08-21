@@ -3,7 +3,8 @@
   const header = document.querySelector(".site-header");
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector("#site-nav");
-  const contactForm = document.querySelector("[data-contact-form]");
+  const scrollButtons = document.querySelectorAll("[data-scroll-target]");
+  const contactForms = document.querySelectorAll("[data-contact-form]");
 
   if (header) {
     const setHeaderState = () => {
@@ -14,58 +15,74 @@
     window.addEventListener("scroll", setHeaderState, { passive: true });
   }
 
-  if (!toggle || !nav) {
-    setupContactForm();
-    return;
+  if (toggle && nav) {
+    const openMenu = () => {
+      body.classList.add("nav-open");
+      toggle.setAttribute("aria-expanded", "true");
+      nav.dataset.open = "true";
+      const firstLink = nav.querySelector("a");
+
+      if (firstLink) {
+        firstLink.focus({ preventScroll: true });
+      }
+    };
+
+    const closeMenu = () => {
+      body.classList.remove("nav-open");
+      toggle.setAttribute("aria-expanded", "false");
+      nav.dataset.open = "false";
+    };
+
+    toggle.addEventListener("click", () => {
+      if (body.classList.contains("nav-open")) {
+        closeMenu();
+        return;
+      }
+
+      openMenu();
+    });
+
+    nav.addEventListener("click", (event) => {
+      if (event.target.closest("a")) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
+        toggle.focus({ preventScroll: true });
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.matchMedia("(min-width: 861px)").matches) {
+        closeMenu();
+      }
+    });
   }
 
-  const openMenu = () => {
-    body.classList.add("nav-open");
-    toggle.setAttribute("aria-expanded", "true");
-    const firstLink = nav.querySelector("a");
+  scrollButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const targetId = button.getAttribute("data-scroll-target");
+      const target = targetId ? document.getElementById(targetId) : null;
 
-    if (firstLink) {
-      firstLink.focus({ preventScroll: true });
-    }
-  };
+      if (!target) {
+        return;
+      }
 
-  const closeMenu = () => {
-    body.classList.remove("nav-open");
-    toggle.setAttribute("aria-expanded", "false");
-  };
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
 
-  toggle.addEventListener("click", () => {
-    if (body.classList.contains("nav-open")) {
-      closeMenu();
-      return;
-    }
-
-    openMenu();
+      if (target.hasAttribute("tabindex")) {
+        target.focus({ preventScroll: true });
+      }
+    });
   });
 
-  nav.addEventListener("click", (event) => {
-    if (event.target.closest("a")) {
-      closeMenu();
-    }
-  });
+  contactForms.forEach(setupContactForm);
 
-  document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") {
-      closeMenu();
-      toggle.focus({ preventScroll: true });
-    }
-  });
-
-  window.addEventListener("resize", () => {
-    if (window.matchMedia("(min-width: 861px)").matches) {
-      closeMenu();
-    }
-  });
-
-  setupContactForm();
-
-  function setupContactForm() {
-    if (!contactForm || !window.fetch || !window.FormData) {
+  function setupContactForm(contactForm) {
+    if (!window.fetch || !window.FormData) {
       return;
     }
 

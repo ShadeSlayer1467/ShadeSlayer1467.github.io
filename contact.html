@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | ReadTech Solutions</title>
+  <meta name="description" content="Contact ReadTech Solutions about automating a repetitive or time-expensive business process.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://readtechsolutions.com/contact.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ReadTech Solutions">
+  <meta property="og:title" content="Contact | ReadTech Solutions">
+  <meta property="og:description" content="Tell me what repetitive process is taking too much time.">
+  <meta property="og:url" content="https://readtechsolutions.com/contact.html">
+  <meta name="theme-color" content="#211915">
+  <link rel="icon" href="assets/img/readtech-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/readtech-site.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <button class="skip-link" type="button" data-scroll-target="main">Skip to content</button>
+
+  <header class="site-header" data-scrolled="false">
+    <div class="site-header__inner">
+      <a class="brand" href="index.html" aria-label="ReadTech Solutions home">
+        <img class="brand__mark" src="assets/img/readtech-mark.svg" alt="" width="44" height="44">
+        <span class="brand__text">
+          <span class="brand__name">ReadTech Solutions</span>
+          <span class="brand__line">Automation that saves working hours</span>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav">
+        <span class="nav-toggle__line"></span>
+        <span class="nav-toggle__line"></span>
+        <span class="nav-toggle__label">Menu</span>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="automation.html">What I Automate</a>
+        <a href="process.html">How It Works</a>
+        <a aria-current="page" class="site-nav__cta" href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="section contact-section contact-section--page" aria-labelledby="contact-title">
+      <div class="section__inner contact-layout">
+        <div class="contact-intro">
+          <p class="eyebrow">Contact</p>
+          <h1 id="contact-title">What process is taking too much time?</h1>
+          <p>Send a rough description. A few plain-English sentences are enough to start.</p>
+          <address class="contact-details">
+            <strong>ReadTech Solutions LLC</strong>
+            <span>Southern Oklahoma / Texoma / remote</span>
+            <a href="mailto:matthew@readtechsolutions.com">matthew@readtechsolutions.com</a>
+            <a href="tel:+19712372807">(971) 237-2807</a>
+          </address>
+        </div>
+
+        <form class="contact-form" method="post" action="https://formspree.io/f/xovwjoeg" data-contact-form>
+          <input type="hidden" name="_subject" value="ReadTech process discussion">
+          <label class="visually-hidden" for="website">Website</label>
+          <input class="form-honeypot" type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off">
+
+          <div class="form-grid">
+            <div class="form-field">
+              <label for="name">Name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="form-field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="form-field">
+              <label for="company">Company</label>
+              <input id="company" name="company" type="text" autocomplete="organization">
+            </div>
+            <div class="form-field">
+              <label for="phone">Phone <span>optional</span></label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel">
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="process">What process is taking too much time?</label>
+            <textarea id="process" name="process" rows="5" required></textarea>
+          </div>
+
+          <div class="form-field">
+            <label for="frequency">How often does it happen? <span>optional</span></label>
+            <input id="frequency" name="frequency" type="text" placeholder="Daily, weekly, monthly, hundreds of records at a time...">
+          </div>
+
+          <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+          <button class="button button--primary form-submit" type="submit">Send Process Notes</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="site-footer__inner">
+      <p><strong>ReadTech Solutions LLC</strong></p>
+      <p>Business process automation and custom software. Based in Southern Oklahoma, serving Texoma and remote engagements.</p>
+      <p>&copy; 2026 ReadTech Solutions LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/readtech-site.js"></script>
+</body>
+</html>

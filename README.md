@@ -6,7 +6,10 @@ ReadTech Solutions LLC is positioned as a Southern Oklahoma / Texoma business-pr
 
 ## Site Structure
 
-- `index.html` - production single-page website
+- `index.html` - production homepage
+- `automation.html` - detail page for automation examples
+- `process.html` - detail page for project flow and fit criteria
+- `contact.html` - dedicated contact page
 - `assets/css/readtech-site.css` - original responsive styling
 - `assets/js/readtech-site.js` - small navigation/header enhancement script
 - `assets/img/readtech-mark.svg` - original ReadTech visual mark and favicon
