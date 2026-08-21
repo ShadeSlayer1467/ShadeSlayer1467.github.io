@@ -6,7 +6,10 @@
   --red-700: #a63129;
   --red-500: #c94638;
   --amber: #c47a2d;
-  --paper: #f6f0e8;
+  --sage: #dfe7d8;
+  --sage-deep: #39483d;
+  --clay: #eadccc;
+  --paper: #edf0e5;
   --surface: #fffaf5;
   --surface-strong: #ffffff;
   --muted: #6d645c;
@@ -30,7 +33,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, #f8f1e8 0%, var(--paper) 42%, #f2e8dc 100%);
   color: var(--ink);
   font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
   font-size: 16px;
@@ -160,7 +164,7 @@ strong {
   top: 0;
   z-index: 50;
   border-bottom: 1px solid rgba(33, 25, 21, 0.08);
-  background: rgba(246, 240, 232, 0.94);
+  background: rgba(255, 250, 245, 0.94);
   backdrop-filter: blur(16px);
   transition: box-shadow 180ms ease, background-color 180ms ease;
 }
@@ -347,7 +351,12 @@ strong {
 }
 
 .page-hero__inner {
-  padding: clamp(3.2rem, 7vw, 6rem) 0;
+  padding: clamp(2.4rem, 5vw, 4rem) 0;
+}
+
+.page-hero h1 {
+  max-width: 880px;
+  font-size: clamp(2.45rem, 4.6vw, 4.35rem);
 }
 
 .hero h1,
@@ -386,6 +395,7 @@ strong {
 
 .hero .eyebrow,
 .page-hero .eyebrow,
+.section--next .eyebrow,
 .section--charcoal .eyebrow,
 .contact-section .eyebrow {
   color: #f09b66;
@@ -481,7 +491,9 @@ strong {
 }
 
 .section--light {
-  background: var(--paper);
+  background:
+    linear-gradient(180deg, rgba(255, 250, 245, 0.4), rgba(255, 250, 245, 0)),
+    var(--paper);
 }
 
 .section--charcoal,
@@ -493,6 +505,17 @@ strong {
 .section--split {
   background:
     linear-gradient(90deg, var(--surface) 0 64%, var(--paper) 64% 100%);
+}
+
+.section--next {
+  background:
+    linear-gradient(135deg, rgba(33, 25, 21, 0.97), rgba(57, 72, 61, 0.95)),
+    linear-gradient(90deg, rgba(201, 70, 56, 0.24), rgba(196, 122, 45, 0.08) 48%, transparent 100%);
+  color: var(--surface);
+}
+
+.section--next p {
+  color: rgba(255, 250, 245, 0.72);
 }
 
 .section__inner {
@@ -513,6 +536,79 @@ strong {
 .section-heading p {
   max-width: 760px;
   font-size: 1.08rem;
+}
+
+.automation-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(340px, 0.65fr);
+  align-items: end;
+  gap: clamp(2rem, 6vw, 5rem);
+  margin-bottom: clamp(2rem, 5vw, 3.5rem);
+  border-bottom: 1px solid rgba(33, 25, 21, 0.12);
+  padding-bottom: clamp(1.6rem, 4vw, 2.5rem);
+}
+
+.automation-intro__copy {
+  max-width: 760px;
+}
+
+.automation-intro__copy h2 {
+  max-width: 12ch;
+  font-size: clamp(2.25rem, 4.1vw, 3.8rem);
+}
+
+.automation-intro__copy p:last-child {
+  max-width: 680px;
+  margin-bottom: 0;
+  color: var(--graphite);
+  font-size: 1.08rem;
+}
+
+.automation-signals {
+  border: 1px solid rgba(57, 72, 61, 0.22);
+  border-radius: var(--radius);
+  background:
+    linear-gradient(135deg, rgba(57, 72, 61, 0.96), rgba(45, 41, 38, 0.96)),
+    var(--sage-deep);
+  color: var(--surface);
+  padding: 1.2rem;
+  box-shadow: 0 18px 45px rgba(33, 25, 21, 0.12);
+}
+
+.automation-signals > strong {
+  display: block;
+  margin-bottom: 0.9rem;
+  color: #ffd9c1;
+  font-size: 0.85rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.automation-signals ul {
+  display: grid;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.automation-signals li {
+  border-top: 1px solid rgba(255, 250, 245, 0.16);
+  padding-top: 0.85rem;
+}
+
+.automation-signals span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--surface);
+  font-weight: 800;
+}
+
+.automation-signals p {
+  margin: 0;
+  color: rgba(255, 250, 245, 0.68);
+  font-size: 0.95rem;
+  line-height: 1.45;
 }
 
 .section--charcoal p,
@@ -551,8 +647,26 @@ strong {
 .quick-card,
 .detail-card {
   border: 1px solid var(--line);
-  background: rgba(255, 250, 245, 0.72);
+  background: rgba(255, 250, 245, 0.86);
   padding: 1.35rem;
+  box-shadow: 0 12px 30px rgba(33, 25, 21, 0.06);
+}
+
+.quick-card {
+  border-top: 4px solid rgba(201, 70, 56, 0.72);
+}
+
+.detail-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-card::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: linear-gradient(var(--red-500), var(--amber));
+  content: "";
 }
 
 .quick-card h3,
@@ -605,6 +719,89 @@ strong {
 
 .link-stack a:hover {
   color: var(--red-700);
+}
+
+.next-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 0.75fr) minmax(380px, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+}
+
+.next-panel__intro {
+  max-width: 620px;
+}
+
+.next-panel__intro h2 {
+  max-width: 11ch;
+}
+
+.next-panel__intro p {
+  max-width: 520px;
+  font-size: 1.08rem;
+}
+
+.detail-links {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.detail-link {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  grid-template-areas:
+    "number title"
+    "number copy";
+  column-gap: 1rem;
+  row-gap: 0.25rem;
+  border: 1px solid rgba(255, 250, 245, 0.16);
+  border-radius: var(--radius);
+  background: rgba(255, 250, 245, 0.08);
+  color: var(--surface);
+  padding: 1.1rem;
+  text-decoration: none;
+  transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+}
+
+.detail-link:hover {
+  transform: translateY(-2px);
+  border-color: rgba(240, 155, 102, 0.42);
+  background: rgba(255, 250, 245, 0.12);
+  color: var(--surface);
+}
+
+.detail-link__number {
+  grid-area: number;
+  display: inline-grid;
+  place-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: rgba(240, 155, 102, 0.14);
+  color: #ffd9c1;
+  font-weight: 900;
+}
+
+.detail-link strong {
+  grid-area: title;
+  color: var(--surface);
+  font-size: 1.06rem;
+  line-height: 1.2;
+}
+
+.detail-link span:last-child {
+  grid-area: copy;
+  color: rgba(255, 250, 245, 0.68);
+}
+
+.detail-link--accent {
+  border-color: rgba(240, 155, 102, 0.38);
+  background: rgba(113, 28, 25, 0.42);
+}
+
+.detail-link--accent .detail-link__number {
+  background: rgba(255, 250, 245, 0.14);
+  color: var(--surface);
 }
 
 .process-grid {
@@ -850,6 +1047,8 @@ strong {
 
 @media (max-width: 1100px) {
   .hero__inner,
+  .automation-intro,
+  .next-panel,
   .two-column,
   .split-cta,
   .fit-layout,

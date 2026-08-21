@@ -52,6 +52,7 @@
       </button>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a aria-current="page" href="index.html">Home</a>
         <a href="automation.html">What I Automate</a>
         <a href="process.html">How It Works</a>
         <a class="site-nav__cta" href="contact.html">Contact</a>
@@ -116,16 +117,29 @@
       </div>
     </section>
 
-    <section class="section section--split" aria-labelledby="home-next-title">
-      <div class="section__inner split-cta">
-        <div>
+    <section class="section section--next" aria-labelledby="home-next-title">
+      <div class="section__inner next-panel">
+        <div class="next-panel__intro">
           <p class="eyebrow">Need more detail?</p>
-          <h2 id="home-next-title">The detailed pages explain what can be automated and how a project starts.</h2>
+          <h2 id="home-next-title">Pick the page that matches your next question.</h2>
+          <p>The homepage stays quick. The deeper pages explain the work, the fit, and the best way to start.</p>
         </div>
-        <div class="link-stack">
-          <a href="automation.html">What I automate</a>
-          <a href="process.html">How I evaluate a process</a>
-          <a href="contact.html">Contact page</a>
+        <div class="detail-links" aria-label="Detailed pages">
+          <a class="detail-link" href="automation.html">
+            <span class="detail-link__number">01</span>
+            <strong>What I automate</strong>
+            <span>See examples of reports, documents, data handoffs, and review work that software can reduce.</span>
+          </a>
+          <a class="detail-link" href="process.html">
+            <span class="detail-link__number">02</span>
+            <strong>How I evaluate a process</strong>
+            <span>Understand how I decide whether automation is likely to save real time and money.</span>
+          </a>
+          <a class="detail-link detail-link--accent" href="contact.html">
+            <span class="detail-link__number">03</span>
+            <strong>Start with one process</strong>
+            <span>Send the rough version. A few plain-English sentences are enough to begin.</span>
+          </a>
         </div>
       </div>
     </section>
